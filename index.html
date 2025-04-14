@@ -1,75 +1,24 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AR.js con marcador personalizado</title>
-
-  <!-- Librerías necesarias -->
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
-
-  <style>
-    body { margin: 0; overflow: hidden; font-family: sans-serif; }
-    #instrucciones {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      padding: 10px;
-      z-index: 10;
-    }
-    #buttons {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      z-index: 10;
-    }
-    button {
-      padding: 10px;
-      font-size: 14px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
-
-  <div id="instrucciones">
-    📷 Apunta la cámara al marcador para ver el modelo.
-  </div>
-
-  <div id="buttons">
-    <button onclick="tomarFoto()">📸 Tomar Foto</button>
-  </div>
-
-  <!-- Pre-cargar el modelo para mayor velocidad -->
-  <a-assets>
-    <a-asset-item id="modelo3d" src="liz1.glb"></a-asset-item>
-  </a-assets>
-
-  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-    <a-marker type="pattern" url="hiro.patt">
-      <a-entity gltf-model="#modelo3d"
-                scale="1 1 1"
-                position="0 0 0"
-                rotation="0 180 0">
-      </a-entity>
-    </a-marker>
-
-    <a-entity camera></a-entity>
-  </a-scene>
-
-  <script>
-    function tomarFoto() {
-      const canvas = document.querySelector('canvas');
-      const img = canvas.toDataURL("image/png");
-      const enlace = document.createElement("a");
-      enlace.href = img;
-      enlace.download = "captura-ar.png";
-      document.body.appendChild(enlace);
-      enlace.click();
-      document.body.removeChild(enlace);
-    }
-  </script>
+    <a-scene arjs>
+        <!--<a-marker preset="hiro">.    -->
+        <a-marker type="pattern" url="https://www.ingejorgehenao.com/liz/mar.patt">
+           <a-entity
+              position="0 0 0"
+              scale="1"
+              gltf-model="https://www.ingejorgehenao.com/liz/liz3.glb"
+            ></a-entity>
+        </a-marker>
+        <a-entity camera position="0 0 0"></a-entity>
+    </a-scene>
 </body>
 </html>
